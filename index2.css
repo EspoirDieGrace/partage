@@ -1,0 +1,13 @@
+body{
+    min-width: 1307px;}
+header{
+    min-width: 1307px;
+}
+.container-fluid{
+    min-width: 1307px;
+    position: relative;
+}
+.container-fluid .row{
+    min-width: 1307px;
+    margin-bottom: 10px;
+}

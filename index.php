@@ -10,17 +10,10 @@ ob_start();
 include('seemore.php');
   include('publication.php');
   //vérifier si l'utilisateur n'est pas connecté
-   if(!isset($_SESSION["id_user"]) || !isset($_SESSION["id_user"])){
+   if(!isset($_SESSION["id_user"])){
      header("Location:inscr_conn.php");
      exit(); 
    }
-  //publicité affichage;
-  //$option = $_POST['option'];
-
-    //$requete="SELECT*FROM loisir,type_pub  ORDER BY id_loisir DESC limit 10";
-  //$resultat = mysqli_query($conn, $requete); 
-  //echo "tete".$requete ;
-  
   ///publication swiper
   $sql="SELECT*FROM `loisir` ORDER BY id_loisir DESC";
   $result = mysqli_query($conn, $sql); 
@@ -214,8 +207,8 @@ if(mysqli_num_rows($result)> 0){
 <div id="grand" style="display: flex;align-items: center;">
 
 <?php
-if(mysqli_num_rows($resultat)> 0){
-  while($row=mysqli_fetch_assoc($resultat)){
+if(mysqli_num_rows($resultaff)> 0){
+  while($row=mysqli_fetch_assoc($resultaff)){
     
   ?>
 <div class="gallery">

@@ -8,6 +8,7 @@ include('seemore.php');
 include('connexiondb.php');
 include('publication.php');
 include('commentaire.php');
+include('likeDislike.php');
 //session
 
 //publicité affichage filtre
@@ -24,8 +25,15 @@ $resulttyppub = mysqli_query($conn, $sqltyppub);
 //type publicité filtre
 $sqlfiltre = "SELECT * FROM `type_pub`";
 $resultfiltre = mysqli_query($conn, $sqlfiltre);
-$sqlCom= "SELECT * FROM `commentaire` ORDER BY id_comment DESC";
+//list comment
+$sqlCom= "SELECT * FROM comment INNER JOIN utilisateur ORDER BY id_comment DESC";
 $resultCom= mysqli_query($conn, $sqlCom);
+//id loisir
+$idloisir=$_GET['id'];
+$sqlloisir = "SELECT * FROM loisir INNER JOIN utilisateur ON loisir.id_user=utilisateur.id_user WHERE loisir.id_loisir=$idloisir";
+$queryloisir = mysqli_query($conn, $sqlloisir);
+$numberloisir = mysqli_num_rows($queryloisir);
+$dataloisir = mysqli_fetch_assoc($queryloisir);
 $lastid = '';
 ?>
 <!DOCTYPE html>
@@ -189,7 +197,7 @@ $lastid = '';
           // determine if user has already liked this post
           $results = mysqli_query($conn, "SELECT * FROM t_like WHERE id_user='$user' AND id_loisir=" . $row['id_loisir'] . "");
              if (mysqli_num_rows($results) == 1) : ?>
-              <form action="like_dislike.php" method="post">
+            <form action="like_dislike.php" method="post">
             <div class="post_info">
               <!-- si la publication est déjà liked -->
               <i class="unlike fa fa-thumbs-up like-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>
@@ -200,7 +208,7 @@ $lastid = '';
               <i class="like fa fa-thumbs-up like-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>
               <i class="unlike hide fa fa-thumbs-o-up like-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>
              <?php endif ;?>
-             <input type="text" disabled value=" <?php echo $row['likes']; ?> " class="likes_counts">
+             <input type="text" disabled value="  " class="likes_counts">
                 
             <?php
             if (mysqli_num_rows($results) == 1) : ?>
@@ -217,9 +225,9 @@ $lastid = '';
               <i class="undislike hide fa fa-thumbs-o-down dislike-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>            
               </button>
               <?php endif ;?>
-            <input type="text" disabled value=" <?php echo $row['likes']; ?> " class="likes_count">
+            <input type="text" disabled value=" " class="likes_count">
             </div>  
-              </form>
+            </form>
         </div>
         <div class="col-sm-6" id="libelle">
           <h4 id="nom"><?php echo $row['nom_loisir']; ?></h4>
@@ -234,22 +242,28 @@ $lastid = '';
 
     <form action="" method="post" class="form">
       <input type="text" name="comment" class="comment" placeholder="commentaire...">
+      <input type="hidden" name="loisir" value="<?php echo $idloisir ?>" />
       <button type="submit" id="btncomment" name="commentaire"><i class="far fa-comment-dots" id="com"></i> </button>
     </form>
-    <?php
-if(mysqli_num_rows($resultCom)> 0){
-  while($com=mysqli_fetch_assoc($resultCom)){
-  ?>
 
+
+  <?php
+//if(mysqli_num_rows($resultCom)> 0){
+ // while($com=mysqli_fetch_assoc($resultCom)){
+?>
+<!-- 
     <div class="listComm" style="border: 2px rgb(0, 153, 255) solid;">
       <h2 style="color: green;"><?php echo $com['text_comment']; ?></h2>
       <h2 style="color:blue ;"><?php echo $com['date_comment']; ?></h2>
-    </div>
+      <h2 style="color:red ;">commentateur <?php echo $com['id_user']; ?></h2>
+      <h2 style="color:blue ;">commentateur <?= $com['nom_user'] ?></h2>
+      <h2 style="color:yellow ;">publicateur <?= $dataloisir['nom_user']; ?></h2>
+    </div>-->
+<?php    
+  //}
+//}
+?> 
 
-    <?php    
-  }
-}
-?>
     </div>
     </div>
   <?php

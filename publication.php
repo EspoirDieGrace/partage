@@ -29,8 +29,8 @@ if($uploadOk == 0){
 }else{
   if(move_uploaded_file($_FILES["image"]["tmp_name"],"" . $destination)) {
       
-      $sql = "INSERT INTO `loisir`(id_user,id_typpub,nom_loisir, img_loisir, datepub)
-       VALUES('$user','$id_typpub','$nom', '$destination', NOW())";
+      $sql = "INSERT INTO `loisir`(id_user,id_typpub,nom_loisir, img_loisir, datepub,likes,dislikes)
+       VALUES('$user','$id_typpub','$nom', '$destination', NOW(),'0','0')";
 
   }
   if(mysqli_query($conn, $sql)){

@@ -1,25 +1,36 @@
+body{
+    min-width: 1000px;
+}
+/* affichage */
+.type{
+    color: #008518;
+}
+.nom{
+    color: #3551EC;
+}
+.desc{
+    color: #000000;
+}
+#day{
+    color: #596CE5;
+}
 /* like dislike */
 .post_info{
 	width: 30%;
     height: 40%;
 	padding: 5px 10px 0px 10px;
-    top: 200px;
+    /* top: 200px; */
+    /* background-color: rgb(255, 255, 255); */
+    display: inline-flex;
 }
-.fa-thumbs-up, .unlike{
+.fa-thumbs-up{
 	color: rgb(0, 153, 255);
-    font-size: 30px;
+    font-size: 25px;
 }
-.fa-thumbs-o-up, .unlike{
-	color: rgb(0, 153, 255);
-    font-size: 30px;
-}
-.fa-thumbs-down, .undislike{
+.fa-thumbs-down{
 	color: rgb(255, 0, 0);
-    font-size: 30px;
-}
-.fa-thumbs-o-down, .undislike{
-	color: rgb(255, 0, 0);
-    font-size: 30px;
+    font-size: 25px;
+    text-align: center;
 }
 .hide {
 	display: none;
@@ -49,6 +60,13 @@
     padding: 0;
     border: none;
     background: none;
+    margin: 5px;
+}
+#like{
+    padding: 0;
+    border: none;
+    background: none;
+    margin: 5px;
 }
 /* autre */
 #conteneura{
@@ -57,9 +75,10 @@
     text-align: center;
 }
 #picture{
+
     height: 320px;
     width: 370px;
-    border: 3px  #008518 solid ;
+    border: 3px  #00d226 solid ;
     border-radius: 30px;
     padding: 30px;
     margin-right: 30px;
@@ -70,13 +89,24 @@ align-items: center;
 align-self: center;
 align-content: center;
 text-align: start;
+height: auto;
+width: 670px;
 }
 .post-info{
-    background-color: aqua;
     display: flex;
 }
-#comp{
-    height: 30px;
-    width: 30px; 
-    background-color: rgb(38, 255, 0); 
+.likedislike{
+    /* margin-left: 30px; */
+    /* margin-top: -20px; */
+    position: relative;
+    width: 200px;
+    height:60px;
+    /* padding-left: 30px; */
+    padding: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    background-color: #ffffff;
 }

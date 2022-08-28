@@ -7,28 +7,41 @@ if (!empty($_POST["id_loisir"])) {
     while ($row = mysqli_fetch_assoc($resultat)) {
       $lastid = $row["id_loisir"];
 ?>
+
+      <!DOCTYPE html>
+      <html lang="en">
+
+      <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="index_base.css" />
+        <title>Document</title>
+      </head>
+      <body>
       <div class="gallery">
-        <a target="_blank" href="#">
-          <div class="contenant">
-            <div class="overlay">
-              <div class="space"> 300 x 250 - jpg<br> maximumwall.com </div>
+          <a href="affichage.php?id=<?= $row['id_loisir'] ?>  ">
+            <div class="conteneur">
+              <img class="test" style="height: 250px; width: 354px;" src="<?= $row['img_loisir'] ?>" />
+              <div class="overlay">300 x 250 - jpg<br> maximumwall.com</div>
+              <div class="overimage"> <img class="img_plus" style="height: 40px;width: 40px;float: right;" src="images/img_plus.png"></div>
             </div>
-            <div class="overimage">
-              <img class="img_plus" style="height: 40px;width: 40px;float: right;" src="images/img_plus.png">
+            <div class="desc">
+              <h4><?php echo $row['nom_loisir']; ?></h4>
+              <h6><?php echo $row['datepub']; ?></h6>
             </div>
-            <img class="test" style="height: 250px; width: 300px;" src="<?= $row['img_loisir'] ?>" />
-          </div>
-        </a>
-        <div class="desc">
-          <h4 style='color:blue'><?php echo $row['nom_loisir']; ?></h4>
-          <h6 style='color:red'><?php echo $row['datepub']; ?></h6>
+          </a>
         </div>
-      </div>
+        <?php
+        $lastid = $row['id_loisir'];
 
-
-  <?php  }
-  }  ?>
-
-<?php
+      ?>
+    <?php
+    }
+  }
+    ?>
+  <?php
 }
-?>
+  ?>
+      </body>
+      </html>

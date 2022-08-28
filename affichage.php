@@ -17,7 +17,7 @@ $requete = "SELECT * FROM loisir INNER JOIN type_pub WHERE loisir.id_loisir=$id"
 $resultat = mysqli_query($conn, $requete);
 
 ///publication swiper
-$sql = "SELECT*FROM `loisir` ORDER BY id_loisir DESC";
+$sql = "SELECT * FROM loisir INNER JOIN type_pub ON loisir.id_typpub = type_pub.id_typpub ORDER BY id_loisir DESC";
 $result = mysqli_query($conn, $sql);
 //type publicité
 $sqltyppub = "SELECT * FROM `type_pub`";
@@ -26,10 +26,10 @@ $resulttyppub = mysqli_query($conn, $sqltyppub);
 $sqlfiltre = "SELECT * FROM `type_pub`";
 $resultfiltre = mysqli_query($conn, $sqlfiltre);
 //list comment
-$sqlCom= "SELECT * FROM comment INNER JOIN utilisateur ORDER BY id_comment DESC";
-$resultCom= mysqli_query($conn, $sqlCom);
+$sqlCom = "SELECT * FROM comment INNER JOIN utilisateur ORDER BY id_comment DESC";
+$resultCom = mysqli_query($conn, $sqlCom);
 //id loisir
-$idloisir=$_GET['id'];
+$idloisir = $_GET['id'];
 $sqlloisir = "SELECT * FROM loisir INNER JOIN utilisateur ON loisir.id_user=utilisateur.id_user WHERE loisir.id_loisir=$idloisir";
 $queryloisir = mysqli_query($conn, $sqlloisir);
 $numberloisir = mysqli_num_rows($queryloisir);
@@ -43,7 +43,7 @@ $lastid = '';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>welikefood</title>
-  <link rel="stylesheet" type="text/css" href="index.css" />
+  <link rel="stylesheet" type="text/css" href="./css/index_base.css" />
   <link rel="stylesheet" href="css/affichage.css">
   <link rel="stylesheet" href="css/commentaire.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -52,20 +52,20 @@ $lastid = '';
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1" />
   <!-- getbootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-  <!-- ===== Fontawesome CDN Link ===== -->
+<!-- Link Swiper's CSS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script src="./script/swiper.js"></script>
+  <link rel="stylesheet" href="css/swiper.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+   <!-- ===== Fontawesome CDN Link ===== -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-  <!-- Link seemore js -->
-  <script src="script/seemore.js" defer></script>
-  <!-- like dislike js 
-  <script src="script/like_dislike.js"></script>-->
+  
 </head>
 
 <body>
@@ -158,7 +158,7 @@ $lastid = '';
     </div>
     <div class="bloc5">
       <form action="" method="GET">
-        <span class="text1">Filtre adulte:
+        <span class="text1">Filtre
           <select name="id_typpub">
             <option disabled value="0" selected>--Select--</option>
             <?php
@@ -171,6 +171,10 @@ $lastid = '';
           </select>
         </span>
       </form>
+      <span class="text2">Titres de pages:<a class="lien6" href="#">Automatique<i class="fa fa-caret-down"></i></a></span>
+      <li>
+        <a class="lien7" href="#">Filtre <i class="fa fa-filter"></i></a>
+      </li>
     </div>
     <div class="bloc6"></div>
 
@@ -182,96 +186,103 @@ $lastid = '';
   <div>
     <hr style="margin-bottom: 10px;margin-top: 1px;">
   </div>
+<!-- swiper -->
+<section class="carousel">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <?php
+        if (mysqli_num_rows($result) > 0) {
+          while ($swiper = mysqli_fetch_assoc($result)) {
+        ?>
+            <div class="swiper-slide">
+              <img class="img_scroll" src="<?= $swiper['img_loisir'] ?>" width="40" height="40" alt="image">
+              <div class="div_text_scroll">
+                <span class="titr1"> <strong><?php echo $swiper['nom_loisir']; ?></strong></span>
+                <br>
+                <span class="titr2"><?php echo $swiper['descr_typp']; ?></span>
+              </div>
+            </div>&nbsp;&nbsp;
+        <?php
+          }
+        }
+        ?>
+      </div>
+    </div>
+
+    <div class="swiper-button-next" style="height: 80px;width: 50px; color: black; background-color: white;font-weight: bold;margin-top: -40px;margin-right: 0;"></div>
+    <div class="swiper-button-prev" style="height: 80px;width: 50px;color: black; background-color: white;font-weight: bold;margin-top: -40px;"></div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".swiper", {
+  slidesPerView: 8,
+  spaceBetween: 4,
+  slidesPerGroup: 8,
+  loop: true,
+  loopFillGroupWithBlank: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
+  </script>
   <?php
   if ($row = mysqli_fetch_assoc($resultat)) {
   ?>
     <div class="container">
-    <h4 style="text-align: center;"><?php echo $row['descr_typp']; ?></h4>
-    <div class="container" id="conteneura">
-      <div class="row" id="rows">
-        <div class="col-sm-6" id="picture">
-          <img class="test" style="height: 250px; width: 300px;" src="<?php echo $row['img_loisir'] ?>" />
-          <!-- like -->
-          <?php
-          $user = $_SESSION["id_user"];
-          // determine if user has already liked this post
-          $results = mysqli_query($conn, "SELECT * FROM t_like WHERE id_user='$user' AND id_loisir=" . $row['id_loisir'] . "");
-             if (mysqli_num_rows($results) == 1) : ?>
-            <form action="like_dislike.php" method="post">
-            <div class="post_info">
-              <!-- si la publication est déjà liked -->
-              <i class="unlike fa fa-thumbs-up like-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>
-              <i class="like hide fa fa-thumbs-o-up like-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>
-              <?php else : ?>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <!-- si la publication est déjà disliked -->
-              <i class="like fa fa-thumbs-up like-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>
-              <i class="unlike hide fa fa-thumbs-o-up like-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>
-             <?php endif ;?>
-             <input type="text" disabled value="  " class="likes_counts">
-                
-            <?php
-            if (mysqli_num_rows($results) == 1) : ?>
+      <h4 class="type" style="text-align: center;"><?php echo $row['descr_typp']; ?></h4>
+      <div class="container" id="conteneura">
+        <div class="row" id="rows">
+          <div class="col-sm-6" id="picture">
+            <img class="test" style="height: 250px; width: 300px;" src="<?php echo $row['img_loisir'] ?>" />
+            <div class="likedislike">
+              <!-- like -->
+              <form action="" method="POST">
+                <div class="post_info">
+                  <!-- loisir -->
+                  <input hidden type="text" value="<?php echo $idloisir ?>" name="loisir">
+                  <!-- like -->
+                  <input hidden type="text" value="like" name="likes">
+                  <!-- bouton like -->
+                  <input type="text" disabled value="<?php echo $countlike ?>" class="likes_counts">
+                  <button type="submit" id="like" name="like"><i class="like fa fa-thumbs-up like-btn"></i></button>
+                </div>
+              </form>
               <!-- dislike -->
-              <button type="submit" id="dislike" onclick="clickMe()">
-              <i class="undislike fa fa-thumbs-down dislike-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>
-              <i class="dislike hide fa fa-thumbs-o-down dislike-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>
-              </button>
-              <?php else : ?>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <!-- dislike -->
-              <button type="submit" id="dislike" onclick="clickMe()">
-              <i class="dislike fa fa-thumbs-down dislike-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>
-              <i class="undislike hide fa fa-thumbs-o-down dislike-btn" data-id="<?php echo $row['id_loisir']; ?>"></i>            
-              </button>
-              <?php endif ;?>
-            <input type="text" disabled value=" " class="likes_count">
-            </div>  
-            </form>
-        </div>
-        <div class="col-sm-6" id="libelle">
-          <h4 id="nom"><?php echo $row['nom_loisir']; ?></h4>
-          <h4 id="desc">Le lorem ipsum est, en imprimerie, une suite de mots sans signification
-            <br> utilisée à titre provisoire pour calibrer une mise en page,
-            <br> le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée.
-            <br> Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
-          </h4>
-          <h6 id="day"><?php echo $row['datepub']; ?></h6>
+              <form action="" method="post">
+                <div class="post_info">
+                  <!-- loisir -->
+                  <input hidden type="text" value="<?php echo $idloisir ?>" name="loisir">
+                  <!-- dislike -->
+                  <input hidden type="text" value="dislike" name="dislikes">
+                  <!-- dislike -->
+                  <button type="submit" id="dislike" name="dislike"><i class="fa fa-thumbs-down dislike-btn"></i></button>
+                  <input type="text" disabled value="<?php echo $countdislike ?>" class="likes_count">
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-6" id="libelle">
+            <h4 class="nom" id="nom"><?php echo $row['nom_loisir']; ?></h4>
+            <h4 id="desc"><?php echo $row['desc_loisir']; ?></h4>
+            <h6 id="day"><?php echo $row['datepub']; ?></h6>
+          </div>
         </div>
       </div>
-
+    </div>
+  <?php
+  }
+  ?>
+  <div class="commentaire">
+    <div class="commentair">
     <form action="" method="post" class="form">
       <input type="text" name="comment" class="comment" placeholder="commentaire...">
       <input type="hidden" name="loisir" value="<?php echo $idloisir ?>" />
       <button type="submit" id="btncomment" name="commentaire"><i class="far fa-comment-dots" id="com"></i> </button>
     </form>
-
-
-  <?php
-//if(mysqli_num_rows($resultCom)> 0){
- // while($com=mysqli_fetch_assoc($resultCom)){
-?>
-<!-- 
-    <div class="listComm" style="border: 2px rgb(0, 153, 255) solid;">
-      <h2 style="color: green;"><?php echo $com['text_comment']; ?></h2>
-      <h2 style="color:blue ;"><?php echo $com['date_comment']; ?></h2>
-      <h2 style="color:red ;">commentateur <?php echo $com['id_user']; ?></h2>
-      <h2 style="color:blue ;">commentateur <?= $com['nom_user'] ?></h2>
-      <h2 style="color:yellow ;">publicateur <?= $dataloisir['nom_user']; ?></h2>
-    </div>-->
-<?php    
-  //}
-//}
-?> 
-
     </div>
-    </div>
-  <?php
-  }
-  ?>
-  <h1>L'univers de <?= $data['nom_user'] ?></h1>
-  <p>Bonne visite</p>
-  <p><?php echo $user ?></p>
+  </div>
 </body>
 
 </html>

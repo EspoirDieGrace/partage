@@ -1,5 +1,6 @@
 <?php
 include('connexiondb.php');
+include('session.php');
 //inscription
 if(isset($_POST['commentaire'])){
 $user=$_SESSION["id_user"];
@@ -8,7 +9,7 @@ $loisir=$_POST["loisir"];
     $sql = "INSERT INTO `comment`(text_comment,date_comment,id_loisir,id_user)
             VALUES('$comment',NOW(),'$loisir','$user')";
              if(mysqli_query($conn, $sql)){
-              echo " ";
+              echo "ok ";
              }else{
                echo "error: ". $sql . "<br>" .mysqli_error($conn), $loisir;
             }

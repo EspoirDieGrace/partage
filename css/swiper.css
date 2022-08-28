@@ -1,0 +1,62 @@
+ /*carousel*/
+
+
+ .carousel{
+  /* position: reklative;  */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  bottom: 8px;
+}
+/* .swiper{
+   display: inline-flex;
+} */
+
+.swiper-wrapper{
+   list-style: none;
+   text-decoration: none;
+}
+li{
+   list-style: none;
+}
+.swiper-wrapper .swiper-slide{
+
+  font-size: 18px;
+  background: #fff;
+   margin: 5px;
+padding: 10px;
+border-radius: 50px;   
+border: 0.5px solid skyblue;
+width: 170px;
+height: 70px;      
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+margin-right: 10px;
+}
+.swiper-button-next, .swiper-button-prev{
+  opacity:1;
+  background-color: #FFFFFF;
+color: black;
+border: 1px black;
+width: 1000px;
+height: 100px;
+
+}
+.swiper-button-next:hover, .swiper-button-prev:hover{
+  opacity: 1;
+  background-color: #FFFFFF;
+}
+.titr2{
+  font-size: 10px;
+}

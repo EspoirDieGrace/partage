@@ -31,7 +31,7 @@ $lastid = '';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>welikefood</title>
-  <link rel="stylesheet" type="text/css" href="index_base.css" />
+  <link rel="stylesheet" type="text/css" href="css/index_base.css" />
   <link rel="stylesheet" href="css/index2.css">
   <script src="swiper.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -72,14 +72,23 @@ $lastid = '';
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
+                  <h4 class="modal-title">Publication</h4>
                   <div id="message"></div>
                 </div>
                 <div class="modal-body">
                   <form action="" id="myform" method="POST" enctype="multipart/form-data">
                     <div class="row mb-3">
-                      <label for="inputEmail3" class="col-sm-2 col-form-label">Description</label>
+                      <label for="inputEmail3" class="col-sm-2 col-form-label">Nom</label>
                       <div class="col-sm-10">
                         <input required type="text" name="nom" class="form-control" id="description" />
+                        <span class="error" id="description_err"> </span>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-2 col-form-label">Description</label>
+                      <div class="col-sm-10">
+                        <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
+                        <!-- <input type="text" name="description" class="form-control" id="description" /> -->
                         <span class="error" id="description_err"> </span>
                       </div>
                     </div>
@@ -199,16 +208,16 @@ $lastid = '';
   <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
   <script>
     var swiper = new Swiper(".swiper", {
-  slidesPerView: 8,
-  spaceBetween: 4,
-  slidesPerGroup: 8,
-  loop: true,
-  loopFillGroupWithBlank: true,
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
+      slidesPerView: 8,
+      spaceBetween: 4,
+      slidesPerGroup: 8,
+      loop: true,
+      loopFillGroupWithBlank: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
   </script>
   <!-- swiper fin -->
   <!--galerie image-->

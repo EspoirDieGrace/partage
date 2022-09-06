@@ -57,15 +57,15 @@ $lastid = '';
   <!-- bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Link Swiper's CSS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <!-- Link Swiper's CSS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
   <script src="./script/swiper.js"></script>
   <link rel="stylesheet" href="css/swiper.css">
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-   <!-- ===== Fontawesome CDN Link ===== -->
+  <!-- ===== Fontawesome CDN Link ===== -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-  
+
 </head>
 
 <body>
@@ -186,8 +186,8 @@ $lastid = '';
   <div>
     <hr style="margin-bottom: 10px;margin-top: 1px;">
   </div>
-<!-- swiper -->
-<section class="carousel">
+  <!-- swiper -->
+  <section class="carousel">
     <div class="swiper">
       <div class="swiper-wrapper">
         <?php
@@ -216,16 +216,16 @@ $lastid = '';
   <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
   <script>
     var swiper = new Swiper(".swiper", {
-  slidesPerView: 8,
-  spaceBetween: 4,
-  slidesPerGroup: 8,
-  loop: true,
-  loopFillGroupWithBlank: true,
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
+      slidesPerView: 8,
+      spaceBetween: 4,
+      slidesPerGroup: 8,
+      loop: true,
+      loopFillGroupWithBlank: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
   </script>
   <?php
   if ($row = mysqli_fetch_assoc($resultat)) {
@@ -276,11 +276,11 @@ $lastid = '';
   ?>
   <div class="commentaire">
     <div class="commentair">
-    <form action="" method="post" class="form">
-      <input type="text" name="comment" class="comment" placeholder="commentaire...">
-      <input type="hidden" name="loisir" value="<?php echo $idloisir ?>" />
-      <button type="submit" id="btncomment" name="commentaire"><i class="far fa-comment-dots" id="com"></i> </button>
-    </form>
+      <form action="" method="post" class="form">
+        <input type="text" name="comment" class="comment" placeholder="commentaire...">
+        <input type="hidden" name="loisir" value="<?php echo $idloisir ?>" />
+        <button type="submit" id="btncomment" name="commentaire"><i class="far fa-comment-dots" id="com"></i> </button>
+      </form>
     </div>
   </div>
 </body>

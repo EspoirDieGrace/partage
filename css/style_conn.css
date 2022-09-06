@@ -1,6 +1,3 @@
-body{
-    background-color: #3a7d34;
-}
 ul, li {
     margin:0;
     padding:0;
@@ -8,9 +5,9 @@ ul, li {
 }
 #pswd_info {
     position:absolute;
-    bottom:-75px;
+    bottom:-45px;
     bottom: -115px\9; /* IE Specific */
-    right:55px;
+    right:25px;
     width:250px;
     padding:15px;
     background:#fefefe;

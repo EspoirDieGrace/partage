@@ -65,7 +65,7 @@ $lastid = '';
   <!-- ===== Fontawesome CDN Link ===== -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
+  <script src="script/like_dislike.js"></script>
 </head>
 
 <body>
@@ -81,55 +81,6 @@ $lastid = '';
         </div>
       </div>
       <nav class="navi1">
-        <li>
-          <!-- Trigger the modal with a button -->
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Publier</button>
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <div id="message"></div>
-                </div>
-                <div class="modal-body">
-                  <form action="" id="myform" method="POST" enctype="multipart/form-data">
-                    <div class="row mb-3">
-                      <label for="inputEmail3" class="col-sm-2 col-form-label">Description</label>
-                      <div class="col-sm-10">
-                        <input required type="text" name="nom" class="form-control" id="description" />
-                        <span class="error" id="description_err"> </span>
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="inputEmail3" class="col-sm-2 col-form-label">Type publication</label>
-                      <div class="col-sm-10">
-                        <select name="id_typpub" class="form-control" id="description" required>
-                          <?php
-                          while ($row = mysqli_fetch_assoc($resulttyppub)) {
-                          ?>
-                            <option value="<?php echo $row['id_typpub']; ?>"><?php echo $row['id_typpub'], $row['descr_typp']; ?> </option>
-                          <?php
-                          };
-                          ?>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="inputPassword3" class="col-sm-2 col-form-label">Image</label>
-                      <div class="col-sm-10">
-                        <input type="file" name="image" class="form-control" id="image">
-                        <span class="error" id="image_err"> </span>
-                      </div>
-                    </div>
-                    <br>
-                    <br>
-                    <button id="validationbtn" type="submit" class="btn btn-success" name="inscription">Envoyer</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
         <li><a class="lien2" href="#">Connexion</a></li>
         <li><i class="fa fa-bars" id="lien3"></i></li>
       </nav>
@@ -156,7 +107,7 @@ $lastid = '';
       </nav>
     </div>
     </div>
-    <div class="bloc5">
+    <!-- <div class="bloc5">
       <form action="" method="GET">
         <span class="text1">Filtre
           <select name="id_typpub">
@@ -175,7 +126,7 @@ $lastid = '';
       <li>
         <a class="lien7" href="#">Filtre <i class="fa fa-filter"></i></a>
       </li>
-    </div>
+    </div> -->
     <div class="bloc6"></div>
 
   </header>
@@ -241,9 +192,9 @@ $lastid = '';
               <form action="" method="POST">
                 <div class="post_info">
                   <!-- loisir -->
-                  <input hidden type="text" value="<?php echo $idloisir ?>" name="loisir">
+                  <input hidden type="text" value="<?php echo $idloisir ?>" name="loisir" id="loisir">
                   <!-- like -->
-                  <input hidden type="text" value="like" name="likes">
+                  <input hidden type="text" value="like" name="likes" id="like">
                   <!-- bouton like -->
                   <input type="text" disabled value="<?php echo $countlike ?>" class="likes_counts">
                   <button type="submit" id="like" name="like"><i class="like fa fa-thumbs-up like-btn"></i></button>
@@ -284,9 +235,5 @@ $lastid = '';
     </div>
   </div>
 </body>
-
 </html>
-
-<?php
-
-?>
+<?php ?>

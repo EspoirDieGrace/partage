@@ -2,8 +2,8 @@
 include('session.php');
 include('connexiondb.php');
 if(isset($_POST['inscription'])){
-  $nom=$_POST['nom'];
-  $description=$_POST['description'];
+  $nom=addslashes($_POST['nom']);
+  $description=addslashes($_POST['description']);
   $id_typpub=$_POST['id_typpub'];
   $user=$_SESSION["id_user"];
   //image
@@ -29,9 +29,8 @@ if($uploadOk == 0){
 
 }else{
   if(move_uploaded_file($_FILES["image"]["tmp_name"],"" . $destination)) {
-       $sql = "INSERT INTO `loisir`(id_user,id_typpub,nom_loisir,desc_loisir,img_loisir, datepub)
-       VALUES('$user','$id_typpub','$nom','$description' ,'$destination', NOW())";
-
+    $sql="INSERT INTO `loisir`(id_user,id_typpub,nom_loisir,desc_loisir,img_loisir,datepub)
+    VALUES ('$user','$id_typpub','$nom','$description','$destination',NOW())"; 
   }
   if(mysqli_query($conn, $sql)){
     echo "succes";
@@ -42,3 +41,4 @@ if($uploadOk == 0){
 }
 header('location:index.php');
 }
+?>

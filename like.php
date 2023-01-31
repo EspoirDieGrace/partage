@@ -34,10 +34,6 @@ $queryloisir = mysqli_query($conn, $sqlloisir);
 $numberloisir = mysqli_num_rows($queryloisir);
 $dataloisir = mysqli_fetch_assoc($queryloisir);
 $lastid = '';
-////like dislike
-$loisir=$_GET['id'];
-$sqllike="SELECT * FROM like_dislike WHERE id_loisir=$loisir ";  
-$resullike=mysqli_query($conn, $sqllike);
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,7 +43,7 @@ $resullike=mysqli_query($conn, $sqllike);
 
   <title>welikefood</title>
   <link rel="stylesheet" type="text/css" href="./css/index_base.css" />
-  <link rel="stylesheet" href="./css/view.css">
+  <link rel="stylesheet" href="css/affichage.css">
   <link rel="stylesheet" href="css/commentaire.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -68,9 +64,7 @@ $resullike=mysqli_query($conn, $sqllike);
   <!-- ===== Fontawesome CDN Link ===== -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-  <script src="./script/like_dislike.js"></script>
-  <!-- ===== jquery ===== -->
-  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="script/like_dislike.js"></script>
 </head>
 
 <body>
@@ -192,20 +186,31 @@ $resullike=mysqli_query($conn, $sqllike);
         <div class="row" id="rows">
           <div class="col-sm-6" id="picture">
             <img class="test" style="height: 250px; width: 300px;" src="<?php echo $row['img_loisir'] ?>" />
-            <div class="row" id="all">
-              <div class="col-sm-6 like">
-                <a href="javascript:void(0)" class="row">
-                  <span class="like fa fa-thumbs-up like-btn" onclick="liked('<?php echo $row['id_loisir']?>')"> 
-                  <span class="counts_like" id="count_like<?php echo $row['id_loisir']?>">  <?php echo $row['like_count'] ?></span>   
-                </span>
-                </a>
-              </div>
-              <div class="col-sm-6 dislike">
-                <a href="javascript:void(0)" class="row">
-                  <span class="dislike fa fa-thumbs-down dislike-btn" onclick="disliked('<?php echo $row['id_loisir']?>')"> 
-                  <span class="counts_dislike" id="count_dislike<?php echo $row['id_loisir']?>">  <?php echo $row['dislike_count'] ?> </span> </span>
-                </a>
-              </div>
+            <div class="likedislike">
+              <!-- like -->
+              <form action="" method="POST">
+                <div class="post_info">
+                  <!-- loisir -->
+                  <input hidden type="text" value="<?php echo $idloisir ?>" name="loisir" id="loisir">
+                  <!-- like -->
+                  <input hidden type="text" value="like" name="likes" id="like">
+                  <!-- bouton like -->
+                  <input type="text" disabled value="<?php echo $countlike ?>" class="likes_counts">
+                  <button type="submit" id="like" name="like"><i class="like fa fa-thumbs-up like-btn"></i></button>
+                </div>
+              </form>
+              <!-- dislike -->
+              <form action="" method="post">
+                <div class="post_info">
+                  <!-- loisir -->
+                  <input hidden type="text" value="<?php echo $idloisir ?>" name="loisir">
+                  <!-- dislike -->
+                  <input hidden type="text" value="dislike" name="dislikes">
+                  <!-- dislike -->
+                  <button type="submit" id="dislike" name="dislike"><i class="fa fa-thumbs-down dislike-btn"></i></button>
+                  <input type="text" disabled value="<?php echo $countdislike ?>" class="likes_count">
+                </div>
+              </form>
             </div>
           </div>
           <div class="col-sm-6" id="libelle">
@@ -228,33 +233,6 @@ $resullike=mysqli_query($conn, $sqllike);
       </form>
     </div>
   </div>
-  <script>
-    function liked(id_loisir){
-    jQuery.ajax({
-      url:'count_likedislike.php',
-      type:'post',
-      data:'type=like&id_loisir='+id_loisir,
-      success:function(result){
-        var count=jQuery('#count_like'+id_loisir).html();
-        count++;
-        jQuery('#count_like'+id_loisir).html(count);
-      }
-    })
-}
-
-function disliked(id_loisir){
-    jQuery.ajax({
-      url:'count_likedislike.php',
-      type:'post',
-      data:'type=dislike&id_loisir='+id_loisir,
-      success:function(result){
-        var count=jQuery('#count_dislike'+id_loisir).html();
-        count++;
-        jQuery('#count_dislike'+id_loisir).html(count);
-      }
-    })
-}
-  </script>
 </body>
 </html>
 <?php ?>

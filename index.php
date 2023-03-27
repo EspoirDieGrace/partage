@@ -54,7 +54,7 @@ $lastid = '';
 <body>
   <header>
     <div class="bloc1">
-      <a href="#"><img src="./Img/logo/logo.jpg" class="imj1"></a>
+      <a href="dash.php"><img src="./Img/logo/logo.jpg" class="imj1"></a>
       <div class="bloc2">
         <input class="para1" type="text" value="nourriture">
         <div class="bloc3">
@@ -208,9 +208,9 @@ $lastid = '';
   <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
   <script>
     var swiper = new Swiper(".swiper", {
-      slidesPerView: 8,
+      slidesPerView: 7,
       spaceBetween: 4,
-      slidesPerGroup: 8,
+      slidesPerGroup: 7,
       loop: true,
       loopFillGroupWithBlank: true,
       navigation: {

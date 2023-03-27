@@ -69,7 +69,7 @@ if(mysqli_num_rows($remail)> 0){
              echo "error: ". $sql . "<br>" .mysqli_error($conn);
            }
            mysqli_close($conn);
-         header('location:inscr_conn.php.php');
+         header('location:dash.php');
   }
 }
 
